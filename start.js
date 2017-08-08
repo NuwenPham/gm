@@ -9,5 +9,4 @@ requirejs.config({
 // main.js
 define(["js/main"], function(){
     var main = requirejs("js/main");
-    debugger;
 });

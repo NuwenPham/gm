@@ -6,7 +6,9 @@
         "js/baseClass"
     ];
     define(libs, function(){
+
         return Base.inherit({
+
             constructor: function(_opt){
                 this._opts = Object.extend({
 
@@ -14,6 +16,7 @@
 
                 this._events = [];
             },
+
             on: function (_eventName, _callback, _context) {
                 if (_eventName == undefined || _callback == undefined)
                     return false;
@@ -29,6 +32,7 @@
                 this._events.push(lEvent);
                 return true;
             },
+
             off: function (_eventName, _callback) {
                 var a = 0;
                 if (_eventName == undefined)
@@ -47,6 +51,7 @@
                     a++;
                 }
             },
+
             trigger: function (_eventName, _params) {
                 var a = 0;
                 if (this._events) {
@@ -65,6 +70,7 @@
                     }
                 }
             }
+
         });
     });
 })(window);

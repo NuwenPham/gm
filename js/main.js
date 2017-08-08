@@ -8,7 +8,7 @@
     ];
     define(libs, function(){
         var v = Object.create(null);
-        window.v = v;
+        _export.v = v;
 
         var point = requirejs("js/types/point");
         v.point = point;
