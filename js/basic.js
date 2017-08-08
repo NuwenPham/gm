@@ -2,11 +2,13 @@
  * Created by Cubla on 07.08.2017.
  */
 (function(_export){
+var name = "js/basic";
     var libs = [
-        "js/baseClass"
+        //"js/baseClass"
     ];
-    define(libs, function(){
+    define( /*name, libs,*/ function(){
 
+        requirejs.module(name);
         return Base.inherit({
 
             constructor: function(_opt){

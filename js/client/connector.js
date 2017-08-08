@@ -1,15 +1,15 @@
 /**
  * Created by pham on 8/8/17.
  */
-(function (_export) {
+//(function (_export) {
 
     var libs = [
         "js/basic"
     ];
 
     define([libs], function () {
-        var basic = requirejs("js/basic");
-
+        var basic = require("js/basic");
+debugger;
         var connector = basic.inherit({
             constructor: function connector(_options) {
                 var options = {
@@ -42,7 +42,7 @@
             },
 
             socket: function () {
-                this._socket;
+                return this._socket;
             },
 
             _on_open: function (_data) {
@@ -69,9 +69,18 @@
             _on_error: function (_error) {
                 console.log("ERR:\n" + _error.message);
                 this.trigger("error", _error);
+            },
+
+            send: function(_id, _data){
+                var result_obj = {
+                    id: _id,
+                    data: _data
+                };
+                var result_string = JSON.stringify(result_obj);
+                this._socket.send(result_string);
             }
         });
 
         return connector;
     })
-})(window);
+//})(window);

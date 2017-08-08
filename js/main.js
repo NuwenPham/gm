@@ -4,13 +4,24 @@
 (function(_export){
     var libs = [
         "js/baseClass",
-        "js/types/point"
+        "js/types/point",
+        "js/client/dispatcher"
     ];
     define(libs, function(){
         var v = Object.create(null);
         _export.v = v;
 
-        var point = requirejs("js/types/point");
+        var point = require("js/types/point");
         v.point = point;
+
+
+        var dispatcher = require("js/client/dispatcher");
+        _export.dispatcher = dispatcher;
+        debugger;
+
+
+        dispatcher.reg()
+
+
     });
 })(window);

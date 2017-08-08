@@ -2,6 +2,8 @@
  * Created by pham on 15.06.15.
  */
 
+var window = global.window = Object.create(null);
+
 var cl = function () {
 };
 
