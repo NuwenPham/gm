@@ -1,15 +1,16 @@
 /**
  * Created by pham on 8/8/17.
  */
-//(function (_export) {
+(function (_export) {
+    var name = "js/client/connector";
 
     var libs = [
         "js/basic"
     ];
 
-    define([libs], function () {
+    define(name, libs, function () {
         var basic = require("js/basic");
-debugger;
+
         var connector = basic.inherit({
             constructor: function connector(_options) {
                 var options = {
@@ -19,10 +20,10 @@ debugger;
                 };
                 Object.extend(options, _options);
                 basic.prototype.constructor.call(this, options);
-                this.init();
+                this._init();
             },
 
-            init: function () {
+            _init: function () {
                 this._protocol = this._opts.protocol;
                 this._host = this._opts.host;
                 this._port = this._opts.port;
@@ -83,4 +84,4 @@ debugger;
 
         return connector;
     })
-//})(window);
+})(window);

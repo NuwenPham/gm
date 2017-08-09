@@ -4,17 +4,13 @@
 (function (_export) {
     var name = "js/client/dispatcher";
     var libs = [
-        //"js/basic"
-        //"js/client/connector"
+        "js/basic",
+        "js/client/connector"
     ];
-    debugger;
 
-    define(name, [libs], function () {
+    define(name, libs, function () {
         var basic = require("js/basic");
-
-        debugger;
-        //var connector = requirejs("js/client/connector");
-
+        var connector = requirejs("js/client/connector");
 
         var counter = 0;
 
@@ -73,7 +69,6 @@
             this.callback = data.callback;
         };
 
-        //requirejs.module(name);
         return dispatcher;
     })
 })(window);

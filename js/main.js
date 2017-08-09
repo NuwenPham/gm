@@ -17,11 +17,6 @@
 
         var dispatcher = require("js/client/dispatcher");
         _export.dispatcher = dispatcher;
-        debugger;
-
-
-        dispatcher.reg()
-
 
     });
 })(window);
