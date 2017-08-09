@@ -16,7 +16,7 @@
                 var options = {
                     protocol: "ws",
                     host: "127.0.0.1",
-                    port: "1337"
+                    port: "1400"
                 };
                 Object.extend(options, _options);
                 basic.prototype.constructor.call(this, options);

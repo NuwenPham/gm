@@ -26,10 +26,10 @@
 
                 this._subscribers = {};
 
-                this.init();
+                this._init();
             },
 
-            init: function () {
+            _init: function () {
                 this.start_connector();
             },
 
@@ -48,12 +48,13 @@
             },
 
             add: function (_callback) {
-                var data = new data({
+                var data = new _data({
                     callback: _callback
                 });
 
                 var id = counter++;
                 this._subscribers[id] = data;
+                return id;
             },
 
             send: function(_id, _data){
@@ -61,12 +62,12 @@
             }
         });
 
-        var data = function data(_opts){
+        var _data = function _data(_opts){
             var opts = {};
             Object.extend(opts, _opts);
 
-            this.data = data.data;
-            this.callback = data.callback;
+            this.data = opts.data;
+            this.callback = opts.callback;
         };
 
         return dispatcher;

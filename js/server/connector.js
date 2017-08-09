@@ -42,9 +42,9 @@ var connector = basic.inherit({
 
     _on_message: function(_message){
         console.log("членоэврика");
-        if (message.type === 'utf8') {
-            console.log("CHLEN:\n" + message.utf8Data.toString());
-            this.trigger("data", message.utf8Data);
+        if (_message.type === 'utf8') {
+            console.log("CHLEN:\n" + _message.utf8Data.toString());
+            this.trigger("data", _message.utf8Data);
         }
     },
 
