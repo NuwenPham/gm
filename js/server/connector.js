@@ -10,6 +10,7 @@ var connector = basic.inherit({
         var options = {
             port: 1400
         };
+
         Object.extend(options, _options);
         basic.prototype.constructor.call(this, options);
         this._init();
@@ -17,6 +18,10 @@ var connector = basic.inherit({
 
     _init: function () {
         this._port = this._opts.port;
+
+        this._counter = 0;
+        this._connections = {};
+
         this.create_socket();
     },
 
@@ -34,17 +39,17 @@ var connector = basic.inherit({
         this._wsServer.on('request', this._on_request.bind(this));
     },
 
-    _on_close: function(_connection){
+    _on_close: function(_connection_id, _connection){
         // член
         console.log("close CHLEN:\n");
         this.trigger("closed", {reason: "clen"});
     },
 
-    _on_message: function(_message){
+    _on_message: function(_connection_id, _message){
         console.log("членоэврика");
         if (_message.type === 'utf8') {
-            console.log("CHLEN:\n" + _message.utf8Data.toString());
-            this.trigger("data", _message.utf8Data);
+            // console.log("CHLEN:\n" + _message.utf8Data.toString());
+            this.trigger("data", JSON.parse(_message.utf8Data));
         }
     },
 
@@ -52,17 +57,30 @@ var connector = basic.inherit({
         var connection = _request.accept(null, _request.origin);
 
         // здесь точно чего-нибудь недостает :DD
-        connection.on('message', this._on_message.bind(this));
-        connection.on('close', this._on_close.bind(this));
+        connection.on('message', this._on_message.bind(this, this._counter));
+        connection.on('close', this._on_close.bind(this, this._counter));
+        this._connections[this._counter] = connection;
+
+        this.trigger("new_connection", this._counter );
+/*
+
+        this.send(this._counter, {
+            server_id: -1,
+            data: {
+                command: "handshake",
+                connection_id: this._counter
+            }
+        });
+*/
+
+        this._counter++;
     },
 
-    send: function(_id, _data){
-        var result_obj = {
-            id: _id,
-            data: _data
-        };
-        var result_string = JSON.stringify(result_obj);
-        this._socket.send(result_string);
+    send: function(_connection_id, _data){
+        var connection = this._connections[_connection_id];
+        var str = JSON.stringify(_data);
+        console.log(str);
+        connection.send(str);
     }
 });
 

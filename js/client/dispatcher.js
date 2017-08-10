@@ -39,8 +39,16 @@
                 this._connector.on("closed", this._on_closed.bind(this));
             },
 
-            _on_data: function (_data) {
-                debugger;
+            _on_data: function (_event) {
+                var client_id = _event.data.client_id;
+
+                if(_event.data.command == "new_connection"){
+                    debugger;
+                    this.trigger("new_connection", _event);
+                } else {
+                    debugger;
+                    this._subscribers[client_id].callback(_event);
+                }
             },
 
             _on_closed: function(_data){
@@ -58,7 +66,10 @@
             },
 
             send: function(_id, _data){
-                this._connector.send(_id, _data);
+                this._connector.send({
+                    client_id: _id,
+                    data: _data
+                });
             }
         });
 

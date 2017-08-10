@@ -62,9 +62,11 @@
             },
 
             _on_message: function (_data) {
-                debugger;
+                // debugger;
                 console.log("DATA:\n" + _data.data);
-                this.trigger("data", _data.data);
+                var str = _data.data;
+                // console.log(str);
+                this.trigger("data", JSON.parse(str));
             },
 
             _on_error: function (_error) {
@@ -72,13 +74,8 @@
                 this.trigger("error", _error);
             },
 
-            send: function(_id, _data){
-                var result_obj = {
-                    id: _id,
-                    data: _data
-                };
-                var result_string = JSON.stringify(result_obj);
-                this._socket.send(result_string);
+            send: function(_data){
+                this._socket.send(JSON.stringify(_data));
             }
         });
 
