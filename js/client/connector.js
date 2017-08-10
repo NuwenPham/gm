@@ -63,7 +63,7 @@
 
             _on_message: function (_data) {
                 // debugger;
-                console.log("DATA:\n" + _data.data);
+                console.log("%cIN:\n" + _data.data, "color: red");
                 var str = _data.data;
                 // console.log(str);
                 this.trigger("data", JSON.parse(str));
@@ -75,6 +75,8 @@
             },
 
             send: function(_data){
+                var result = JSON.stringify(_data);
+                console.log("%cOUT:\n" + JSON.stringify(_data), "color: blue");
                 this._socket.send(JSON.stringify(_data));
             }
         });

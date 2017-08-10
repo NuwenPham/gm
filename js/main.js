@@ -5,6 +5,7 @@
     var libs = [
         "js/baseClass",
         "js/types/point",
+        "js/client/test",
         "js/client/dispatcher"
     ];
     define(libs, function(){
@@ -12,6 +13,7 @@
         _export.v = v;
 
         var point = require("js/types/point");
+        var test = require("js/client/test");
         v.point = point;
 
 
@@ -21,16 +23,10 @@
 
         var handshake_handler = function (_data) {
 
-            var id = dispatcher.add(function (_event) {
-                debugger;
-            });
+            _export.server = Object.create(null);
+            _export.server.server_id = _data.server_id;
 
-            dispatcher.send(id, {
-                server_id: _data.server_id,
-                text: "hello world"
-            });
-
-            debugger;
+            _export.test = new test();
         };
 
         dispatcher.on("new_connection", handshake_handler);

@@ -46,9 +46,8 @@ var connector = basic.inherit({
     },
 
     _on_message: function(_connection_id, _message){
-        console.log("членоэврика");
         if (_message.type === 'utf8') {
-            // console.log("CHLEN:\n" + _message.utf8Data.toString());
+             console.log("IN:\n" + _message.utf8Data.toString());
             this.trigger("data", JSON.parse(_message.utf8Data));
         }
     },
@@ -62,24 +61,13 @@ var connector = basic.inherit({
         this._connections[this._counter] = connection;
 
         this.trigger("new_connection", this._counter );
-/*
-
-        this.send(this._counter, {
-            server_id: -1,
-            data: {
-                command: "handshake",
-                connection_id: this._counter
-            }
-        });
-*/
-
         this._counter++;
     },
 
-    send: function(_connection_id, _data){
+    send: function(_connection_id, _data) {
         var connection = this._connections[_connection_id];
         var str = JSON.stringify(_data);
-        console.log(str);
+        console.log("OUT:\n" + str);
         connection.send(str);
     }
 });

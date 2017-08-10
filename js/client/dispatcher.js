@@ -43,10 +43,10 @@
                 var client_id = _event.data.client_id;
 
                 if(_event.data.command == "new_connection"){
-                    debugger;
+                    //debugger;
                     this.trigger("new_connection", _event);
                 } else {
-                    debugger;
+                    //debugger;
                     this._subscribers[client_id].callback(_event);
                 }
             },
