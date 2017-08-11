@@ -6,7 +6,9 @@
         "js/baseClass",
         "js/types/point",
         "js/client/test",
-        "js/client/dispatcher"
+        "js/client/dispatcher",
+        //"js/client/test",
+        "js/client/navigation"
     ];
     define(libs, function(){
         var v = Object.create(null);
@@ -14,6 +16,7 @@
 
         var point = require("js/types/point");
         var test = require("js/client/test");
+        var navigation = require("js/client/navigation");
         v.point = point;
 
 
@@ -27,6 +30,11 @@
             _export.server.server_id = _data.server_id;
 
             _export.test = new test();
+            _export.nav = new navigation();
+
+            var page = location.hash !== undefined && (location.hash).slice(1);
+
+            _export.nav.open(page || "main_menu");
         };
 
         dispatcher.on("new_connection", handshake_handler);

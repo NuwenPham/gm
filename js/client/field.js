@@ -5,17 +5,14 @@
  * Created by pham on 8/8/17.
  */
 (function (_export) {
-    var name = "js/client/dispatcher";
+    var name = "js/client/field";
     var libs = [
-        "js/basic",
-        "js/client/connector"
+        "js/basic"
     ];
 
     define(name, libs, function () {
         var basic = require("js/basic");
-        var connector = requirejs("js/client/connector");
 
-        var counter = 0;
 
         var field = basic.inherit({
             constructor: function dispatcher(_options) {
@@ -46,6 +43,6 @@
             this.callback = opts.callback;
         };
 
-        return dispatcher;
+        return field;
     })
 })(window);

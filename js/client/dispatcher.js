@@ -10,7 +10,7 @@
 
     define(name, libs, function () {
         var basic = require("js/basic");
-        var connector = requirejs("js/client/connector");
+        var connector = require("js/client/connector");
 
         var counter = 0;
 
