@@ -30,7 +30,24 @@
             },
 
             _init: function () {
-                this.start_connector();
+                this.__create_god_mode();
+            },
+
+            __create_god_mode: function(){
+                var renderer = PIXI.autoDetectRenderer(256, 256);
+                document.body.appendChild(renderer.view);
+
+                var stage = new PIXI.Container();
+                renderer.render(stage);
+
+
+                var rectangle = new Graphics();
+                rectangle.beginFill(0x66CCFF);
+                rectangle.lineStyle(4, 0xFF3300, 1);
+                rectangle.drawRect(x, y, width, height);
+                rectangle.endFill();
+
+                stage.addChild(rectangle);
             }
 
         });

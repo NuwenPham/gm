@@ -51,12 +51,7 @@
                 window.location = "#" + _id;
 
                 this._history.push(_id);
-
-                if(this._last_child !== undefined){
-                    document.body.removeChild(this._last_child);
-                    this._last_child = undefined;
-                }
-
+                this._last_child && document.body.removeChild(this._last_child);
                 this._last_child = elem;
             },
 

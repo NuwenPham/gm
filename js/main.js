@@ -4,6 +4,7 @@
 (function(_export){
     var libs = [
         "js/baseClass",
+        "js/utils/pixi.min.js",
         "js/types/point",
         "js/client/test",
         "js/client/dispatcher",
@@ -34,7 +35,7 @@
 
             var page = location.hash !== undefined && (location.hash).slice(1);
 
-            _export.nav.open(page || "main_menu");
+            _export.nav.open( page || "main_menu" );
         };
 
         dispatcher.on("new_connection", handshake_handler);

@@ -46,7 +46,7 @@
                 return item;
             },
 
-            create_menu: function(){
+            create_menu: function () {
                 this._menu = document.createElement("div");
                 this._menu.setAttribute("class", "menu");
                 this._menu.style.width = "100%";
