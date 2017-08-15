@@ -10,6 +10,7 @@
         "js/basic",
 
         "js/client/pages/main_menu",
+        "js/client/pages/error_404",
         "js/client/pages/game_field"
     ];
 
@@ -21,6 +22,7 @@
 
         var pages_map = {
             main_menu: require("js/client/pages/main_menu"),
+            error_404: require("js/client/pages/error_404"),
             game_field: require("js/client/pages/game_field")
         };
 
@@ -43,6 +45,9 @@
             },
 
             open: function(_id){
+                if(!pages_map[_id]){
+                    _id = "error_404"
+                }
                 var _page = new pages_map[_id]();
                 var elem = _page.get_dom_elem();
 

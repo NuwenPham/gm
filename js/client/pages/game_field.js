@@ -7,11 +7,13 @@
 (function (_export) {
     var name = "js/client/pages/game_field";
     var libs = [
-        "js/basic"
+        "js/basic",
+        "js/client/views/field"
     ];
 
     define(name, libs, function () {
         var basic = require("js/basic");
+        var v_field = require("js/client/views/field");
 
 
         var game_field = basic.inherit({
@@ -26,66 +28,12 @@
             },
 
             _init: function () {
-                this._create_god_mode();
+                //this._create_god_mode();
 
+                this._field = new v_field();
             },
 
             _create_god_mode: function(){
-                this._renderer = PIXI.autoDetectRenderer(this._opts.field_width, this._opts.field_height);
-                this._renderer.view.style.background = "rgba(255,0,0,1)";
-                //document.body.appendChild(this._renderer.view);
-
-                this._stage = new PIXI.Container();
-                this._stage.intercative = true;
-
-                // работа с pixi.js
-                this.create_locs();
-
-                this._renderer.render(this._stage);
-
-                //this.draw_grid();
-
-                //var rectangle = new PIXI.Graphics();
-                ////rectangle.beginFill(0x66CCFF);
-                //rectangle.lineStyle(1, 0xFF3300, 1);
-                //rectangle.drawRect(5, 5, 100, 100);
-                ////rectangle.endFill();
-                //
-                //stage.addChild(rectangle);
-                //this._renderer.render(stage);
-            },
-
-            draw_grid: function() {
-                //var line = new PIXI.Graphics();
-                //line.moveTo(0,);
-
-                var x = 10;
-                var y = 10;
-
-                var vertLength = this._opts.field_width;
-                var horLength = this._opts.field_height;
-
-                var a = 0;
-                while (a < y) {
-                    var line = new PIXI.Graphics();
-                    line.lineStyle(1, 0xFFFFFF, 1);
-                    line.moveTo(0, a * (horLength/y));
-                    line.lineTo(horLength, a * (horLength/y));
-                    this._stage.addChild(line);
-                    a++;
-                }
-
-                var b = 0;
-                while (b < x) {
-                    var line = new PIXI.Graphics();
-                    line.lineStyle(1, 0xFFFFFF, 1);
-                    line.moveTo(b * (vertLength/x), 0);
-                    line.lineTo(b * (vertLength/x), vertLength);
-                    this._stage.addChild(line);
-                    b++;
-                }
-
-                this._renderer.render(this._stage);
 
             },
 
@@ -143,13 +91,11 @@
                     }
                     a++;
                 }
-
                 this._renderer.render(this._stage);
-
             },
 
             get_dom_elem: function(){
-                return this._renderer.view;
+                return this._field._renderer.view;
             }
 
         });

@@ -103,6 +103,7 @@ var methods_tree = {
 global.check_user = check_user;
 global.create_user = create_user;
 
+
 var client_enter_point = function (_data) {
     var connection_id = _data.connection_id;
     var data = _data.data;
@@ -119,12 +120,6 @@ var client_enter_point = function (_data) {
     }
 
     obj({connection_id:connection_id, server_id:server_id, client_id:client_id, event:event});
-
-    // echo...
-    /* dispatcher.send(connection_id, server_id, {
-        client_id: client_id
-    })
-    */
 };
 
 
