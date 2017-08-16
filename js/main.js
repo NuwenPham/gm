@@ -3,8 +3,9 @@
  */
 (function(_export){
     var libs = [
-        "js/baseClass",
         "js/utils/pixi.min.js",
+
+        "js/baseClass",
         "js/types/point",
         "js/client/test",
         "js/client/dispatcher",

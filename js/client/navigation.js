@@ -29,7 +29,7 @@
         var navigation = basic.inherit({
             constructor: function navigation(_options) {
                 var options = {
-
+                    redirect_error_page: "error_404"
                 };
                 Object.extend(options, _options);
                 basic.prototype.constructor.call(this, options);
@@ -46,7 +46,7 @@
 
             open: function(_id){
                 if(!pages_map[_id]){
-                    _id = "error_404"
+                    _id = this._opts.redirect_error_page;
                 }
                 var _page = new pages_map[_id]();
                 var elem = _page.get_dom_elem();

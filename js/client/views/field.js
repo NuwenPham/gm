@@ -27,7 +27,11 @@
                 Object.extend(options, _options);
                 basic.prototype.constructor.call(this, options);
 
+                this._empty_field = new v.point(options.rows - 1, options.cols - 1);
+                this._is_ready_to_render = true;
+                this._locs = [];
                 this._init();
+
             },
 
             _init: function () {
@@ -45,15 +49,12 @@
             },
 
             gen_field: function () {
-                var hor_count = 5;
-                var vert_count = 5;
-
                 var row = 0;
-                while (row < vert_count) {
+                while (row < this._opts.rows) {
                     var col = 0;
-                    while (col < hor_count) {
+                    while (col < this._opts.cols) {
 
-                        if (col == hor_count - 1 && row == vert_count - 1) {
+                        if (col == this._empty_field.x && row == this._empty_field.y) {
                             col++;
                             continue;
                         }
@@ -65,7 +66,7 @@
                 }
             },
 
-            add_loc: function(_row, _col){
+            add_loc: function(_col, _row){
                 var s_hor = this._opts.field_width / this._opts.cols;
                 var s_vert = this._opts.field_height / this._opts.rows;
                 var loc = new v_loc({
@@ -78,8 +79,93 @@
                     hover_fill: 0x778877
                 });
                 loc.to_draw();
+                this._locs.push(loc);
                 this._stage.addChild(loc.graphics());
                 this._renderer.render(this._stage);
+
+                loc.on("move", this._on_loc_move.bind(this));
+                loc.on("down", this._on_loc_down.bind(this));
+                loc.on("up", this._on_loc_up.bind(this));
+            },
+
+            _on_loc_down: function (_data) {
+                var loc = _data.owner;
+                console.log(this._opts.rows * loc.get("row_pos") + loc.get("col_pos") - 1);
+
+                var event = _data.event;
+                this._stage.setChildIndex(loc.graphics(), this._locs.length - 1);
+                this.render();
+            },
+
+            _on_loc_move: function (_data) {
+                var loc = _data.owner;
+                var event = _data.event;
+                this.render();
+            },
+
+            _on_loc_up: function (_data) {
+
+                var loc = _data.owner;
+                var event = _data.event;
+
+                console.log(this._opts.rows * loc.get("row_pos") + loc.get("col_pos") - 1);
+                var col_pos = (event.x - (event.x % loc.get("width"))) / loc.get("width");
+                var row_pos = (event.y - (event.y % loc.get("height"))) / loc.get("height");
+
+                if (this.check_pos(loc, event)) {
+                    //debugger;
+                    this._empty_field.x = loc.get("col_pos");
+                    this._empty_field.y = loc.get("row_pos");
+                    loc.set("row_pos", row_pos);
+                    loc.set("col_pos", col_pos);
+                }
+
+                var index = this._opts.rows * loc.get("row_pos") + loc.get("col_pos");
+                if (index < 0) index = 0;
+                if (index > this._locs.length - 1) index = this._locs.length - 1;
+
+                this._stage.setChildIndex(loc.graphics(), index);
+                this.render();
+            },
+
+            check_pos: function (loc, event) {
+                console.log(this._opts.rows * loc.get("row_pos") + loc.get("col_pos") - 1);
+
+                var col_pos = (event.x - (event.x % loc.get("width"))) / loc.get("width");
+                var row_pos = (event.y - (event.y % loc.get("height"))) / loc.get("height");
+
+                var is_shot = row_pos == this._empty_field.y && col_pos == this._empty_field.x;
+
+                var hor = Math.abs(loc.get("col_pos") - this._empty_field.x);
+                var ver = Math.abs(loc.get("row_pos") - this._empty_field.y);
+
+                var is_close = hor <= 1 &&  ver<= 1;
+                var is_half_dead_mutherfucker_no_name_variable = (ver + hor) / 2 == 0.5;
+
+                return is_shot && is_close && is_half_dead_mutherfucker_no_name_variable;
+            },
+
+            render: function () {
+                if (this._is_ready_to_render) {
+                    requestAnimationFrame(this._render.bind(this));
+                    this._is_ready_to_render = false;
+                }
+            },
+
+            _render_field: function () {
+                var a = 0;
+                while( a < this._locs.length ){
+                    this._locs[a].to_draw();
+                    this._renderer.render(this._stage);
+                    a++;
+                }
+            },
+
+            _render: function () {
+                this._render_field();
+
+                this._renderer.render(this._stage);
+                this._is_ready_to_render = true;
             }
 
         });
