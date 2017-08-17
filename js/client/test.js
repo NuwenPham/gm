@@ -30,14 +30,14 @@
             create_game: function () {
                 dispatcher.send(this._client_id, {
                     server_id: server.server_id,
-                    command_addr: ["api", "game", "create_game"]
+                    command: ["api", "game", "create_game"]
                 });
             },
 
             join_game: function (_game_id) {
                 dispatcher.send(this._client_id, {
                     server_id: server.server_id,
-                    command_addr: ["api", "game", "join_game"],
+                    command: ["api", "game", "join_game"],
                     game_id: _game_id
                 });
             },
@@ -45,7 +45,7 @@
             users_list: function (_game_id) {
                 dispatcher.send(this._client_id, {
                     server_id: server.server_id,
-                    command_addr: ["api", "game", "users_list"],
+                    command: ["api", "game", "users_list"],
                     game_id: _game_id
                 });
             },
@@ -53,14 +53,14 @@
             games_list: function () {
                 dispatcher.send(this._client_id, {
                     server_id: server.server_id,
-                    command_addr: ["api", "game", "games_list"]
+                    command: ["api", "game", "games_list"]
                 });
             },
 
             leave_game: function (_game_id) {
                 dispatcher.send(this._client_id, {
                     server_id: server.server_id,
-                    command_addr: ["api", "game", "leave_game"],
+                    command: ["api", "game", "leave_game"],
                     game_id: _game_id
                 });
             }

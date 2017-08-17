@@ -134,12 +134,11 @@
                 var col_pos = (event.x - (event.x % loc.get("width"))) / loc.get("width");
                 var row_pos = (event.y - (event.y % loc.get("height"))) / loc.get("height");
 
-                var is_shot = row_pos == this._empty_field.y && col_pos == this._empty_field.x;
-
                 var hor = Math.abs(loc.get("col_pos") - this._empty_field.x);
                 var ver = Math.abs(loc.get("row_pos") - this._empty_field.y);
 
-                var is_close = hor <= 1 &&  ver<= 1;
+                var is_shot = row_pos == this._empty_field.y && col_pos == this._empty_field.x;
+                var is_close = hor <= 1 && ver <= 1;
                 var is_half_dead_mutherfucker_no_name_variable = (ver + hor) / 2 == 0.5;
 
                 return is_shot && is_close && is_half_dead_mutherfucker_no_name_variable;
