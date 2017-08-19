@@ -2,6 +2,7 @@
  * Created by Cubla on 10.08.2017.
  */
 var basic = require("./../basic");
+var field = require("./field");
 
 global.game_counter = 0;
 
@@ -18,7 +19,9 @@ var game = basic.inherit({
 
         this._id = global.game_counter++;
         this._users = [];
-        this._field = null;
+        this._field = new field({
+
+        });
 
     },
 
@@ -44,6 +47,10 @@ var game = basic.inherit({
             return true;
         }
         return false;
+    },
+
+    field: function () {
+        return this._field;
     },
 
     users: function () {

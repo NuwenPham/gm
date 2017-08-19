@@ -11,7 +11,9 @@
 
         "js/client/pages/main_menu",
         "js/client/pages/error_404",
-        "js/client/pages/game_field"
+        "js/client/pages/game_field",
+        "js/client/pages/games_list",
+        "js/client/pages/game_field_2"
     ];
 
 
@@ -23,7 +25,9 @@
         var pages_map = {
             main_menu: require("js/client/pages/main_menu"),
             error_404: require("js/client/pages/error_404"),
-            game_field: require("js/client/pages/game_field")
+            game_field: require("js/client/pages/game_field"),
+            games_list: require("js/client/pages/games_list"),
+            game_field_2: require("js/client/pages/game_field_2")
         };
 
         var navigation = basic.inherit({
