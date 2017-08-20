@@ -31,7 +31,7 @@
                 this.add_menu_item(item);
 
                 item.addEventListener("click", function(){
-                    nav.open("game_field_2");
+                    nav.open("games_list");
                 }.bind(this));
             },
 

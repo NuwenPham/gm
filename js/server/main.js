@@ -2,12 +2,11 @@
  * Created by pham on 8/8/17.
  */
 var _dispatcher = require("./dispatcher.js");
-var _game = require("./game/game.js");
 var _user = require("./game/user.js");
 
 
 // requests
-var game = require("./../requests/game").requests;
+var game = require("./requests/game").requests;
 // дерево, по адресу которого вызывается метод
 var methods_tree = {
     api: {

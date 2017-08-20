@@ -2,7 +2,7 @@
  * Created by Cubla on 19.08.2017.
  */
 
-var _game = require("./game/game.js");
+var _game = require("./../game/game.js");
 var _field_requests = require("./field.js");
 
 var game = {

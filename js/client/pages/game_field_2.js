@@ -5,7 +5,7 @@
  * Created by pham on 8/8/17.
  */
 (function (_export) {
-    var name = "js/client/pages/game_field";
+    var name = "js/client/pages/game_field_2";
     var libs = [
         "js/basic",
         "js/client/views/field"
