@@ -14,6 +14,10 @@ var basic = global.window.Base.inherit({
         this._events = [];
     },
 
+    destructor: function () {
+
+    },
+
     on: function (_eventName, _callback, _context) {
         if (_eventName == undefined || _callback == undefined)
             return false;

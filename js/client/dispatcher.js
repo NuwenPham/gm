@@ -66,6 +66,7 @@
             },
 
             send: function(_id, _data){
+                _data.server_id = server.server_id;
                 this._connector.send({
                     client_id: _id,
                     data: _data

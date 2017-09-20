@@ -8,7 +8,9 @@
     var name = "js/client/navigation";
     var libs = [
         "js/basic",
+        "js/client/pages_list",
 
+        "js/client/pages/hello_page",
         "js/client/pages/main_menu",
         "js/client/pages/error_404",
         "js/client/pages/game_field",
@@ -22,13 +24,7 @@
     define(name, libs, function () {
         var basic = require("js/basic");
 
-        var pages_map = {
-            main_menu: require("js/client/pages/main_menu"),
-            error_404: require("js/client/pages/error_404"),
-            game_field: require("js/client/pages/game_field"),
-            games_list: require("js/client/pages/games_list"),
-            game_field_2: require("js/client/pages/game_field_2")
-        };
+        var pages_map = require("js/client/pages_list");
 
         var navigation = basic.inherit({
             constructor: function navigation(_options) {
@@ -37,6 +33,7 @@
                 };
                 Object.extend(options, _options);
                 basic.prototype.constructor.call(this, options);
+
                 this._init();
             },
 
@@ -45,19 +42,31 @@
                 document.body.style.height = "100%";
                 document.body.style.margin = "0";
 
+                var hashchange = function (_event) {
+                    var page_id = _event.newURL.split("/").pop().split("#").pop();
+                    if (this._history[this._history.length - 1] != page_id) {
+                        this.open(page_id);
+                    }
+                }.bind(this);
+
+                window.addEventListener("hashchange", hashchange);
                 this._history = [];
             },
 
-            open: function(_id){
-                if(!pages_map[_id]){
+            open: function (_id) {
+                var is_error_page = false;
+                if (!pages_map[_id]) {
                     _id = this._opts.redirect_error_page;
+                    is_error_page = true;
                 }
                 var _page = new pages_map[_id]();
-                var elem = _page.get_dom_elem();
+                var elem = _page.wrapper();
 
                 //debugger;
                 document.body.appendChild(elem);
-                window.location = "#" + _id;
+                //if (!_not_api_call || is_error_page) {
+                    window.location = "#" + _id;
+                //}
 
                 this._history.push(_id);
                 this._last_child && document.body.removeChild(this._last_child);

@@ -2,8 +2,8 @@
  * Created by pham on 8/8/17.
  */
 
-var basic = require("./basic");
-var connector = require("./connector");
+var basic = require("./../basic.js");
+var connector = require("./connector.js");
 
 var counter = 0;
 
@@ -48,7 +48,7 @@ var dispatcher = basic.inherit({
     },
 
     _on_closed: function(_data){
-
+        debugger;
     },
 
     add: function (_callback) {

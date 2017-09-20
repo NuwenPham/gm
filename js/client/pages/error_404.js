@@ -33,7 +33,7 @@
                 this._wrapper.innerHTML = "ERROR PAGE";
             },
 
-            get_dom_elem: function(){
+            wrapper: function(){
                 return this._wrapper;
             }
         });

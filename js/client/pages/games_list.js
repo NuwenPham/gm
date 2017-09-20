@@ -42,6 +42,27 @@
                     border: "1px solid #777"
                 });
                 this._background.append(bottom_container);
+
+                this._top_container_content();
+                this._bottom_container_content();
+            },
+
+            _top_container_content: function () {
+                var top_container = new lay({
+                    elem_type: "input"
+                });
+                top_container.css({
+                    width: "100px",
+                    height: "40px",
+                    border: "1px solid #222"
+                });
+                top_container.attrs({
+
+                })
+            },
+
+            _bottom_container_content: function () {
+
             },
 
             get_dom_elem: function(){

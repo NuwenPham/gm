@@ -3,7 +3,7 @@
  */
 var WebSocketServer = require('websocket').server;
 var http = require('http');
-var basic = require('./basic');
+var basic = require('./../basic.js');
 
 var connector = basic.inherit({
     constructor: function connector(_options) {
